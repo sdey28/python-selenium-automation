@@ -19,7 +19,7 @@ def cart_icon(context):
 def cart_message(context):
     actual_result = context.driver.find_element(By.CSS_SELECTOR, "[class='sc-fe064f5c-0 dtCtuk']").text
     expected_result = 'Your cart is empty'
-    assert expected_result == actual_result
+    assert expected_result == actual_result, f"Expected '{expected_result}', got '{actual_result}'"
 
 
 @when('Click Sign In')
@@ -37,4 +37,4 @@ def click_signin_again(context):
 def verify_signin_form(context):
     actual_result = context.driver.find_element(By.XPATH, "//span[text()='Sign into your Target account']").text
     expected_result = 'Sign into your Target account'
-    assert expected_result == actual_result
+    assert expected_result == actual_result, f"Expected '{expected_result}', got '{actual_result}'"
