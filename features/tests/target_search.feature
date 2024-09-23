@@ -15,3 +15,9 @@ Feature: Test Scenarios for main page
     Then verify cart has 1 item(s)
 
 
+  Scenario: Verify search results have product name and image
+    Given Open Target main page
+    When Search for bread
+    Then Verify each product with a name and an image
+
+
