@@ -3,10 +3,18 @@ from behave import given, when, then
 from time import sleep
 
 
+LISTING = (By.CSS_SELECTOR, "[data-test = '@web/site-top-of-funnel/ProductCardWrapper']")
+PRODUCT_NAME = (By.XPATH, "//a[@data-test='product-title']")
+PRODUCT_IMG = (By.CSS_SELECTOR, 'img')
+
+
+
 
 @given('Open Target main page')
 def open_target_main_page(context):
     context.driver.get('https://www.target.com/')
+
+
 
 
 @when('Search for {item}')
@@ -28,14 +36,19 @@ def verify_results(context, item):
 
 @then('Verify each product with a name and an image')
 def verify_search_result(context):
+    context.driver.execute_script("window.scrollBy(0, 2000)", "")
+    sleep(5)
+    context.driver.execute_script("window.scrollBy(0, 2000)", "")
 
 
-    products = context.driver.find_elements(By.CSS_SELECTOR, "[data-test='@web/ProductCard/body']")
-    for product in products:
-        name = context.driver.find_element(By.CSS_SELECTOR, "[data-test='product-title']").text
-        img = context.driver.find_element(By.CSS_SELECTOR, "[data-test='@web/ProductCard/ProductCardImage']").get_attribute('src')
+    all_products = context.driver.find_elements(*LISTING)
 
-        assert name != "" and img != "", f'Expected each product with name {name}, and a image {img}'
+    for product in all_products:
+        print(product)
+        name = product.find_element(*PRODUCT_NAME).text
+        assert name, 'product name not listed'
+        print(name)
+        product.find_element(*PRODUCT_IMG)
 
 
 

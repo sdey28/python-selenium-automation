@@ -17,7 +17,7 @@ def open_target(context):
 
 @when('Click on Cart icon')
 def cart_icon(context):
-    context.driver.find_element(By.CSS_SELECTOR, "[hre*='/icons/Cart.svg#Cart']").click()
+    context.driver.find_element(By.CSS_SELECTOR, "[href*='/icons/Cart.svg#Cart']").click()
 
 
 
