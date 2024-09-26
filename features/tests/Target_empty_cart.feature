@@ -1,9 +1,9 @@
 Feature: Test Scenarios for empty cart functionality
 
-  Scenario: User can clicks on the cart icon and verifies that “Your cart is empty” message
+  Scenario: “Your cart is empty” message is shown for empty cart
     Given Open Target page
     When Click on Cart icon
-    Then Verify message is shown
+    Then Verify “Your cart is empty” message is shown
 
   Scenario: User can navigate to Sign In page
     Given Open target page

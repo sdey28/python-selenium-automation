@@ -12,25 +12,20 @@ PRODUCT_IMG = (By.CSS_SELECTOR, 'img')
 
 @given('Open Target main page')
 def open_target_main_page(context):
-    context.driver.get('https://www.target.com/')
+    context.app.main_page.open_main()
 
 
 
 
 @when('Search for {item}')
 def search_for(context, item):
-    context.driver.find_element(By.ID, 'search').send_keys(item)
-    context.driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
-    sleep(10)
+    context.app.header.search_product(item)
 
 
 
-@then('Verify that correct search result shown for {item}')
-def verify_results(context, item):
-    actual_result = context.driver.find_element(By.XPATH, "//div[@data-test='resultsHeading']").text
-    assert item in actual_result, f'Expected {item}, got actual {actual_result}'
-
-
+@then('Verify that correct search result shown for {product}')
+def verify_results(context, product):
+    context.app.search_results_page.verify_results(product)
 
 
 

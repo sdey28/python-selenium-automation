@@ -11,21 +11,19 @@ SIGN_IN_SIDE_BTN = (By.XPATH, "//span[@class='sc-859e7637-0 hHZPQy']")
 
 @given('Open Target page')
 def open_target(context):
-    context.driver.get('https://www.target.com/')
+    context.app.main_page.open_main()
 
 
 
 @when('Click on Cart icon')
 def cart_icon(context):
-    context.driver.find_element(By.CSS_SELECTOR, "[href*='/icons/Cart.svg#Cart']").click()
+    context.app.cart_page.emp_cart()
 
 
 
-@then('Verify message is shown')
+@then('Verify “Your cart is empty” message is shown')
 def cart_message(context):
-    actual_result = context.driver.find_element(By.CSS_SELECTOR, "[class='sc-fe064f5c-0 dtCtuk']").text
-    expected_result = 'Your cart is empty'
-    assert expected_result == actual_result, f"Expected '{expected_result}', got '{actual_result}'"
+    context.app.cart_page.verify_emp_cart_message()
 
 
 
